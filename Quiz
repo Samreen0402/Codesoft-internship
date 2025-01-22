@@ -1,0 +1,67 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+
+class Question {
+    String question;
+    String[] options;
+    char correctAnswer;
+    
+   public Question(String question, String[] options, char correctAnswer) {
+   this.question = question;
+   this.options = options;
+   this.correctAnswer = correctAnswer;
+   }
+}
+
+public class Quiz {
+   static ArrayList<Question> quizQuestions = new ArrayList<>();
+   static int score = 0;
+   
+   public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+
+     quizQuestions.add(new Question("What is the capital of India?",
+          new String[]{"A. New Delhi", "B. Mumbai", "C. Kolkata", "D. Chennai"}, 'A'));
+
+     quizQuestions.add(new Question("What is the largest planet?", 
+          new String[]{"A. Earth", "B. Jupiter", "C. Saturn", "D. Neptune"}, 'B'));
+
+     for (Question q: quizQuestions) {
+         displayQuestion(q);
+     char userAnswer = getUserAnswer(scanner);
+     if (userAnswer== q.correctAnswer){
+         score++;
+     }
+     }
+     
+     displayResult();
+}
+    private static void displayQuestion(Question q) {
+        System.out.println(q.question);
+        for (String option : q.options) {
+        System.out.println(option);
+
+} 
+    startTimer();
+}
+
+    private static char getUserAnswer (Scanner scanner) {
+        System.out.print("Enter your answer (A/B/C/D): ");
+        return scanner.next().toUpperCase().charAt(0);
+}
+     private static void startTimer() {
+
+     try {
+     TimeUnit.SECONDS.sleep(10);
+
+} catch (InterruptedException e) {
+e.printStackTrace();
+}
+}
+
+private static void displayResult(){
+    System.out.println("Quiz Over!");
+     System.out.println("Your Final Score is: " + score + "/" + quizQuestions.size());
+}
+}
